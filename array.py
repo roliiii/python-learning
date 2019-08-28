@@ -1,3 +1,5 @@
+from functools import reduce
+
 a = [[1,2,3],[3,4,5]]
 print(a[1][2]) #5
 
@@ -13,3 +15,6 @@ intToString = lambda x: str(x)
 b = map(intToString,b)
 
 print("".join(b)) #242424242468
+
+c = reduce(lambda x, y: x*y, [1,2,3,4])
+print(c) #24
