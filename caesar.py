@@ -1,5 +1,5 @@
 
-def caser(inputString, mode='encode', key=13):
+def caesar(inputString, mode='encode', key=13):
 
     if(mode != 'encode'):
         key = key * -1
@@ -24,11 +24,11 @@ def caser(inputString, mode='encode', key=13):
     return translated
 
 def encode(inputString, key=13):
-    return caser(inputString, 'encode', key)
+    return caesar(inputString, 'encode', key)
 
 
 def decode(inputString, key=13):
-    return caser(inputString, 'decode', key)
+    return caesar(inputString, 'decode', key)
 
 encoded = encode('This is a secret!',200)
 print(encoded)
