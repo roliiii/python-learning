@@ -33,3 +33,7 @@ def decode(inputString, key=13):
 encoded = encode('This is a secret!',200)
 print(encoded)
 print(decode(encoded,200))
+
+#http://www.pythonchallenge.com/pc/def/map.html
+print(encode('g fmnc wms bgblr rpylqjyrc gr zw fylb. rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr ylb rfyr\'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj.',2))
+print(encode('map',2))
