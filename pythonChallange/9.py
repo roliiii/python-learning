@@ -28,13 +28,19 @@ b = [156,141,165,135,169,131,176,130,187,134,191,140,191,146,186,150,179,155,175
 77,155,81,148,87,140,96,138,105,141,110,136,111,126,113,129,118,117,128,114,137,115,146,114,155,115,
 158,121,157,128,156,134,157,136,156,136]
 
-print(len(a))
-print(len(b))
-
 response = requests.get('http://huge:file@www.pythonchallenge.com/pc/return/good.jpg')
 img = Image.open(BytesIO(response.content))
 
 draw = ImageDraw.Draw(img)
-draw.line((100,200, 150,300), fill=128)
+
+for i in range(0,len(a)-2,2):
+    act = a[i:i+4]
+    draw.line(act, fill=128, width=3)
+
+for i in range(0,len(b)-2//4,2):
+    act = b[i:i+4]
+    draw.line(act, fill=128, width=3)
 
 img.show()
+
+#cow
