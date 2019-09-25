@@ -10,5 +10,5 @@ ranks = json.loads(data)
 
 for item in ranks["Entries"]:
     if item["Name"] == "Fluffy":
-        print("Rank: " + str(item["Rank"]))
+        print("Rank: " + str(item["Rank"]) + "/" + str(len(ranks["Entries"])))
         break
