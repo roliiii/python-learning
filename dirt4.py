@@ -8,6 +8,7 @@ class EventType(Enum):
 
 class Dirt4RankUtil:
     def __init__(self, gamerMode: bool):
+        self.gamerMode = gamerMode
         self.session = requests.Session() 
         self.session.put(r"""https://www.dirt4game.com/api/profile/set-handling""",{"isAltHandling":gamerMode})
 
@@ -19,7 +20,7 @@ class Dirt4RankUtil:
         return data.json()
 
     def __getEventId(self, eventType: EventType):
-        data = self.session.get(r"""https://www.dirt4game.com/api/event/summary/?altHandling=false""")
+        data = self.session.get(r"""https://www.dirt4game.com/api/event/summary/?altHandling="""+str(self.gamerMode))
         respJson = data.json()
         actEventTypeData = [x for x in respJson["eventTypes"] if x["name"] == eventType.value]
 
