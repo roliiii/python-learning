@@ -34,9 +34,10 @@ class Dirt4RankUtil:
                 parsedData = __getEventData(session, eventId, i)
             for item in parsedData["Entries"]:
                 if item["Name"] == userName:
-                    return("Rank: " + str(item["Rank"]) + "/" + str(len(parsedData["Entries"])))
-            return None
+                    return(str(item["Rank"]) + "/" + str(len(parsedData["Entries"])))
+            return "--/--"
 
 if __name__ == "__main__":
     dirt = Dirt4RankUtil(False)
-    print(dirt.getRank(EventType.OWNERS_CLUB,"Fluffy"))
+    print(EventType.DiRT_DAILY_LIVE.value + ": " + dirt.getRank(EventType.DiRT_DAILY_LIVE,"Fluffy"))
+    print(EventType.OWNERS_CLUB.value + ": " + dirt.getRank(EventType.OWNERS_CLUB,"Fluffy"))
