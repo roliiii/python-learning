@@ -31,11 +31,13 @@ class Dirt4RankUtil:
 
         for i in range(1,parsedData["PageCount"] + 1):
             if(i != 1):
-                parsedData = __getEventData(session, eventId, i)
+                parsedData = self.__getEventData(eventId, i)
+            rank = "--"
             for item in parsedData["Entries"]:
                 if item["Name"] == userName:
-                    return(str(item["Rank"]) + "/" + str(len(parsedData["Entries"])))
-            return "--/--"
+                    rank = str(item["Rank"])
+                    break
+            return rank + "/" + str((parsedData["PageCount"]-1)*100+len(self.__getEventData(eventId, parsedData["PageCount"])["Entries"]))
 
 if __name__ == "__main__":
     dirt = Dirt4RankUtil(False)
