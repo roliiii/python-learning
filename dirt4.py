@@ -40,6 +40,7 @@ class Dirt4RankUtil:
             return rank + "/" + str((parsedData["PageCount"]-1)*100+len(self.__getEventData(eventId, parsedData["PageCount"])["Entries"]))
 
 if __name__ == "__main__":
+    userName = "Fluffy"
     dirt = Dirt4RankUtil(False)
-    print(EventType.DiRT_DAILY_LIVE.value + ": " + dirt.getRank(EventType.DiRT_DAILY_LIVE,"Fluffy"))
-    print(EventType.OWNERS_CLUB.value + ": " + dirt.getRank(EventType.OWNERS_CLUB,"Fluffy"))
+    print(EventType.DiRT_DAILY_LIVE.value + ": " + dirt.getRank(EventType.DiRT_DAILY_LIVE,userName))
+    print(EventType.OWNERS_CLUB.value + ": " + dirt.getRank(EventType.OWNERS_CLUB,userName))
