@@ -1,5 +1,4 @@
 import requests
-import json
 from enum import Enum
 
 class EventType(Enum):
@@ -23,7 +22,6 @@ class Dirt4RankUtil:
         data = self.session.get(f"https://www.dirt4game.com/api/event/summary/?altHandling={str(self.gamerMode)}")
         respJson = data.json()
         actEventTypeData = [x for x in respJson["eventTypes"] if x["name"] == eventType.value]
-
         return actEventTypeData[0]["events"][0]["eventId"]
 
     def getRank(self, eventType: EventType, userName: str):
@@ -34,11 +32,17 @@ class Dirt4RankUtil:
             if(i != 1):
                 parsedData = self.__getEventData(eventId, i)
             rank = "--"
+
             for item in parsedData["Entries"]:
                 if item["Name"] == userName:
                     rank = str(item["Rank"])
                     break
-            return f"{rank}/{str((parsedData['PageCount']-1)*100+len(self.__getEventData(eventId, parsedData['PageCount'])['Entries']))}"
+
+            if i != parsedData['PageCount']:
+                parsedData = self.__getEventData(eventId, parsedData['PageCount'])
+            playerCount = str((parsedData['PageCount']-1)*100+len(parsedData['Entries']))
+            
+            return f"{rank}/{playerCount}"
 
 if __name__ == "__main__":
     userName = "Fluffy"
