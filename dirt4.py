@@ -1,4 +1,5 @@
 import requests
+from multiprocessing.pool import ThreadPool
 from enum import Enum
 
 class EventType(Enum):
@@ -47,5 +48,10 @@ class Dirt4RankUtil:
 if __name__ == "__main__":
     userName = "Fluffy"
     dirt = Dirt4RankUtil(False)
-    print(EventType.DiRT_DAILY_LIVE.value + ": " + dirt.getRank(EventType.DiRT_DAILY_LIVE,userName))
-    print(EventType.OWNERS_CLUB.value + ": " + dirt.getRank(EventType.OWNERS_CLUB,userName))
+    
+    pool = ThreadPool(processes=2)
+    dailyResult = pool.apply_async(dirt.getRank, (EventType.DiRT_DAILY_LIVE,userName))
+    ownersResult = pool.apply_async(dirt.getRank, (EventType.OWNERS_CLUB,userName))
+
+    print(EventType.DiRT_DAILY_LIVE.value + ": " + dailyResult.get())
+    print(EventType.OWNERS_CLUB.value + ": " + ownersResult.get())
