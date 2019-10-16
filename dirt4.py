@@ -21,6 +21,8 @@ class Dirt4RankUtil:
 
     def __getEventId(self, eventType: EventType):
         data = self.session.get(f"https://www.dirt4game.com/api/event/summary/?altHandling={str(self.gamerMode)}")
+        if data.status_code != 200:
+            raise Exception(f"can't reach the server: {data.status_code}")
         respJson = data.json()
         actEventTypeData = [x for x in respJson["eventTypes"] if x["name"] == eventType.value]
         return actEventTypeData[0]["events"][0]["eventId"]
