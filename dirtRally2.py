@@ -8,8 +8,11 @@ class dirtRankFinder():
         self.challengeId = None
 
     def __eventChooser(self):
+        print("Loading event data")
         response = self.session.get("https://dirtrally2.com/api/Challenge/Community")
-        #Todo 200 if not raise exception
+        if(response.status_code != 200):
+            raise Exception("A szerver nem elérhető")
+        
         communityJson = response.json()
 
         #print and choice challange type
@@ -83,6 +86,7 @@ class dirtRankFinder():
                 data["page"] = i 
                 leaderBoardResponse = self.session.post("https://dirtrally2.com/api/Leaderboard", json=data, headers = headers).json()
             
+            print(f"finding in {(i-1)*100}..{i*100-1}")
             for item in leaderBoardResponse["entries"]:
                 if item["name"] == self.nickname:
                     rank = int(item["rank"])
