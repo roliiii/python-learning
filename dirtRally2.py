@@ -44,8 +44,6 @@ else:
     print("Csak daily-re müködik a kód egyenlőre")
     quit()
 
-print(eventId)
-
 data =  {"challengeId":challengeId,
     "selectedEventId":0,
     "stageId":0,
